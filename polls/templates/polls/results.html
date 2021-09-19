@@ -8,11 +8,24 @@
 </ul>
 {% endif %}
 
-<ul>
-{% for choice in question.choice_set.all %}
-    <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
-{% endfor %}
-</ul>
+<style>
+table, th , td {
+    border:1px solid black;
+}
+</style>
 
-<a href="{% url 'polls:detail' question.id %}">Vote again?</a>
+<table>
+    <tr>
+        <th>choice</th>
+        <th>vote</th>
+    </tr>
+    {% for choice in question.choice_set.all %}
+    <tr>
+        <td>{{ choice.choice_text }}</td>
+        <td>{{ choice.votes }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<a href="{% url 'polls:detail' question.id %}"><button>Vote again?</button></a>
 <a href="{% url 'polls:index' %}"><button> Back to list of Polls</button></a>
