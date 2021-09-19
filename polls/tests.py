@@ -55,6 +55,32 @@ class QuestionModelTests(TestCase):
         question = create_question(question_text='Test question.', days=1, ends_date=30)
         self.assertEqual(False, question.is_published())        
 
+    def test_can_vote_work_correctly(self):
+        """
+        can_vote() return True if voting is currently allowed for the question.
+        """
+        question = create_question(question_text='Test question.', days=0, ends_date=30)
+        self.assertEqual(True, question.can_vote())
+
+    def test_can_vote_with_not_published_question(self):
+        """
+        can_vote() return False for not published question.
+        """
+        question = create_question(question_text='Test question.', days=1, ends_date=30)
+        self.assertEqual(False, question.can_vote())
+        question = create_question(question_text='Test question.', days=10, ends_date=30)
+        self.assertEqual(False, question.can_vote())
+
+    def test_can_vote_with_ended_question(self):
+        """
+        can_vote() return False for ended question.
+        """
+        question = create_question(question_text='Test question.', days=-1, ends_date=30)
+        self.assertEqual(False, question.can_vote())
+        question = create_question(question_text='Test question.', days=-10, ends_date=30)
+        self.assertEqual(False, question.can_vote())
+
+
 def create_question(question_text, days, ends_date=30):
     """
     Create a question with the given `question_text` and published the
