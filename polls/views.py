@@ -1,3 +1,4 @@
+from datetime import timedelta
 from django import template
 from django.shortcuts import get_object_or_404, render, get_list_or_404
 from django.http import HttpResponse, response, Http404, HttpResponseRedirect
@@ -7,6 +8,7 @@ from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
 from django.test import TestCase
+from django.contrib import messages
 
 
 class IndexView(generic.ListView):
@@ -27,7 +29,7 @@ class DetailView(generic.DetailView):
 
 class ResultsView(generic.DetailView):
     model = Question
-    template_name = 'polls/resultd.html'
+    template_name = 'polls/results.html'
 
 
 def index(request):
@@ -51,11 +53,15 @@ def vote(request, question_id):
     try:
         selected_choice = question.choice_set.get(pk=request.POST['choice'])
     except (KeyError, Choice.DoesNotExist):
+        messages.warning(request, "You didn't select a choice.")
         return render(request, 'polls/detail.html', {
             'question': question,
-            'error_message': "you didn't select a choice.",
         })
     else:
+        if question.end_date < timezone.now():
+            messages.error(request, "You voted failed! Polls have ended.")
+            return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
         selected_choice.votes += 1
         selected_choice.save()
+        messages.success(request, "You voted successfully.")
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
