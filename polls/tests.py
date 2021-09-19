@@ -34,14 +34,35 @@ class QuestionModelTests(TestCase):
         recent_question = Question(pub_date=time)
         self.assertIs(recent_question.was_published_recently(), True)
 
+    def test_is_published_work_correctly(self):
+        """
+        is_published() return True for current date is on or after question publication date.
+        """
+        question = create_question(question_text='Test question.', days=0, ends_date=30)
+        self.assertEqual(True, question.is_published())
 
-def create_question(question_text, days):
+    def test_is_published_with_old_question(self):
+        """
+        is_published() return True for the question which already create.
+        """
+        question = create_question(question_text='Test question.', days=-1, ends_date=30)
+        self.assertEqual(True, question.is_published())
+
+    def test_is_published_with_future_question(self):
+        """
+        is_published() return Flase for the question which create in the future.
+        """
+        question = create_question(question_text='Test question.', days=1, ends_date=30)
+        self.assertEqual(False, question.is_published())        
+
+def create_question(question_text, days, ends_date=30):
     """
     Create a question with the given `question_text` and published the
     given number of `days` offset to now (negative for questions published
     in the past, positive for questions that have yet to be published).
     """
     time = timezone.now() + datetime.timedelta(days=days)
+    ends = timezone.now() + datetime.timedelta(days=ends_date)
     return Question.objects.create(question_text=question_text, pub_date=time)
 
 
