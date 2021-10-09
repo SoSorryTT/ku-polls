@@ -1,3 +1,4 @@
+"""URL for the specific poll root."""
 from django.urls import path
 from . import views
 

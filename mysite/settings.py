@@ -10,7 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-from logging import ERROR, INFO, WARNING
+# from logging import ERROR, INFO, WARNING
 from django.contrib.messages import constants as messages
 from pathlib import Path
 from decouple import config
