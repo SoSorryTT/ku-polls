@@ -1,4 +1,5 @@
 [![Build Status](https://app.travis-ci.com/SoSorryTT/ku-polls.svg?branch=Travis-CI)](https://app.travis-ci.com/SoSorryTT/ku-polls)
+[![codecov](https://codecov.io/gh/SoSorryTT/ku-polls/branch/Travis-CI/graph/badge.svg?token=MAT3ED2Y3X)](https://codecov.io/gh/SoSorryTT/ku-polls)
 # KU Polls
 A web application for conducting polls at [Kasetsart University](https://www.ku.ac.th).
 
