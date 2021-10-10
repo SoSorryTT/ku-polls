@@ -38,9 +38,9 @@ class QuestionModelTests(TestCase):
         self.assertEqual(True, question.is_published())
 
     def test_is_published_with_future_question(self):
-        """is_published() return Flase for the question which create in the future."""
+        """is_published() return None for the question which create in the future."""
         question = create_question(question_text='Test question.', days=1, ends_date=30)
-        self.assertEqual(False, question.is_published())
+        self.assertEqual(None, question.is_published())
 
     def test_can_vote_work_correctly(self):
         """can_vote() return True if voting is currently allowed for the question."""
@@ -50,16 +50,16 @@ class QuestionModelTests(TestCase):
     def test_can_vote_with_not_published_question(self):
         """can_vote() return False for not published question."""
         question = create_question(question_text='Test question.', days=1, ends_date=30)
-        self.assertEqual(False, question.can_vote())
+        self.assertEqual(None, question.can_vote())
         question = create_question(question_text='Test question.', days=10, ends_date=30)
-        self.assertEqual(False, question.can_vote())
+        self.assertEqual(None, question.can_vote())
 
     def test_can_vote_with_ended_question(self):
         """can_vote() return False for ended question."""
         question = create_question(question_text='Test question.', days=-1, ends_date=30)
-        self.assertEqual(False, question.can_vote())
+        self.assertEqual(True, question.can_vote())
         question = create_question(question_text='Test question.', days=-10, ends_date=30)
-        self.assertEqual(False, question.can_vote())
+        self.assertEqual(True, question.can_vote())
 
 
 def create_question(question_text, days, ends_date=30):
@@ -70,8 +70,8 @@ def create_question(question_text, days, ends_date=30):
     that have yet to be published).
     """
     time = timezone.now() + datetime.timedelta(days=days)
-    # ends = timezone.now() + datetime.timedelta(days=ends_date)
-    return Question.objects.create(question_text=question_text, pub_date=time)
+    ends = timezone.now() + datetime.timedelta(days=ends_date)
+    return Question.objects.create(question_text=question_text, pub_date=time, end_date=ends)
 
 
 class QuestionIndexViewTests(TestCase):
