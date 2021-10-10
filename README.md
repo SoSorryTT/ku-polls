@@ -1,3 +1,4 @@
+[![Build Status](https://app.travis-ci.com/SoSorryTT/ku-polls.svg?branch=Travis-CI)](https://app.travis-ci.com/SoSorryTT/ku-polls)
 # KU Polls
 A web application for conducting polls at [Kasetsart University](https://www.ku.ac.th).
 
