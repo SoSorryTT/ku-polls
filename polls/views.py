@@ -11,6 +11,7 @@ from django.views import generic
 from django.utils import timezone
 # from django.test import TestCase
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 
 class IndexView(generic.ListView):
@@ -61,6 +62,7 @@ def results(request, question_id):
     return render(request, 'polls/results.html', {'question': question})
 
 
+@login_required
 def vote(request, question_id):
     """Poll vote."""
     question = get_object_or_404(Question, pk=question_id)
