@@ -52,7 +52,7 @@ class Choice(models.Model):
     # and templates to get the number of votes for a Choice.
     # We want the existing code to still work.
     @property
-    def votes(self) -> int:
+    def votes(self):
         count = Vote.objects.filter(choice=self).count()
         return count
 
@@ -67,5 +67,5 @@ class Vote(models.Model):
     choice = models.ForeignKey(Choice, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"Vote by {self.user.name} for {self.choice.choice_text}."
+        return f"Vote by {self.user} for {self.choice.choice_text} on question {self.choice.question}."
 
