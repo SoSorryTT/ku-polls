@@ -1,7 +1,28 @@
-li a {
+li {
+    list-style-type: none;
     color: green;
+}
+.container-top{display: flex;
+                justify-content: space-between;}
+h1 {
+    color: black;
+}
+
+* {padding: 0;
+    margin: 0;
 }
 
 body {
-    background: white url("images/background.gif") no-repeat;
+    width: 100%;
+    background-color: red;
+    background-image: url("polls/image/background2.jpg");
 }
+
+#bg {
+    z-index: -1;
+    position:absolute;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+}
+.container{padding: 50px;}

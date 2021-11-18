@@ -8,3 +8,12 @@ A web application for conducting polls at [Kasetsart University](https://www.ku.
 [Wiki Home](../../wiki/Home)    
 [Vision Statement](../../wiki/Vision%20Statement)    
 [Requirements](../../wiki/Requirements)    
+
+## Running KU Polls
+
+User provided by the initial data (users.json):
+
+| Username | Password |
+|----------|----------|
+| test1 | 123456test |
+| test2 | 123456test |
