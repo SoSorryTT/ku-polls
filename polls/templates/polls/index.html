@@ -2,6 +2,15 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
 
+<h1 class="question">Polls</h1>
+
+{% if user.is_authenticated %}
+    <p style="color:black">Hello, {{ user.username }}</p>
+    <p style="color:black">Or, <a href="{% url 'logout' %}">Logout</a></p> 
+{% else %}
+    <p style="color:black">Please <a href="{% url 'login' %}">login</a></p>
+{% endif %}
+
 {% if messages %}
 <ul class="messages">
     {% for msg in messages %}
