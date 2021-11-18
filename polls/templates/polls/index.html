@@ -11,6 +11,9 @@
     <p style="color:black">Please <a href="{% url 'login' %}">login</a></p>
 {% endif %}
 
+<img src='{% static "polls/image/background.jpg" %}' alt="background image" id="bg" >
+
+
 {% if messages %}
 <ul class="messages">
     {% for msg in messages %}
