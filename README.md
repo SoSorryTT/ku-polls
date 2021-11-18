@@ -17,4 +17,3 @@ User provided by the initial data (users.json):
 |----------|----------|
 | test1 | 123456test |
 | test2 | 123456test |
-|----------|----------|
