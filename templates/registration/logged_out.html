@@ -1,11 +1,37 @@
+{% load static %}
 <html>
  <head>
  <title>Sorry to see you go</title>
- </head>
- <body>
- <h2>You Are Logged Out</h2>
- <p>
- Want to vote again? <a href="{% url 'login'%}">Login again</a>
- </body>
- </html>
+ <style>li {
+    list-style-type: none;
+    color: green;
+}
+.container-top{display: flex;
+                justify-content: space-between;}
+h1 {
+    color: black;
+}
+
+* {padding: 0;
+    margin: 0;
+}
+
+#bg {
+    z-index: -1;
+    position:absolute;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+}
+.container{padding: 50px;}</style>
+</head>
+<body>
+<img src='{% static "polls/image/background2.jpg" %}' alt="background image" id="bg" >
+<div class="container">
+<h2>You Are Logged Out</h2>
+<p>
+Want to vote again? <a href="{% url 'login'%}">Login again</a>
+</body>
+</html>
+</div>
  

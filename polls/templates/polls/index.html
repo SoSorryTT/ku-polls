@@ -1,17 +1,56 @@
 {% load static %}
 
+<style>li {
+    list-style-type: none;
+    color: green;
+}
+.container-top{display: flex;
+                justify-content: space-between;}
+h1 {
+    color: black;
+}
+
+* {padding: 0;
+    margin: 0;
+}
+
+body {
+    width: 100%;
+    background-color: red;
+    background-image: url("polls/image/background2.jpg");
+}
+
+#bg {
+    z-index: -1;
+    position:absolute;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+}
+.container{padding: 50px;}</style>
+
 <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
 
-<h1 class="question">Polls</h1>
+<img src='{% static "polls/image/background2.jpg" %}' alt="background image" id="bg" >
 
+<div class="container">
+<div class="container-top">
+    <h1 class="question">Polls</h1>
+<div>
 {% if user.is_authenticated %}
     <p style="color:black">Hello, {{ user.username }}</p>
     <p style="color:black">Or, <a href="{% url 'logout' %}">Logout</a></p> 
 {% else %}
     <p style="color:black">Please <a href="{% url 'login' %}">login</a></p>
 {% endif %}
+</div>
+</div>
 
-<img src='{% static "polls/image/background.jpg" %}' alt="background image" id="bg" >
+<!-- <img src='{% static "polls/image/background2.jpg" %}' alt="background image" id="bg" > -->
+
+<!-- <img id="bg" style="background-image: url('{% static "polls/image/background2.jpg" %}');">
+</img> -->
+
 
 
 {% if messages %}
@@ -22,7 +61,8 @@
 </ul>
 {% endif %}
 
-<div class="container">
+
+
 
     {% if latest_question_list %}
         <ul class="question-list">
