@@ -48,18 +48,18 @@ class QuestionModelTests(TestCase):
         self.assertEqual(True, question.can_vote())
 
     def test_can_vote_with_not_published_question(self):
-        """can_vote() return False for not published question."""
+        """can_vote() return None for not published question."""
         question = create_question(question_text='Test question.', days=1, ends_date=30)
         self.assertEqual(None, question.can_vote())
         question = create_question(question_text='Test question.', days=10, ends_date=30)
         self.assertEqual(None, question.can_vote())
 
     def test_can_vote_with_ended_question(self):
-        """can_vote() return False for ended question."""
-        question = create_question(question_text='Test question.', days=-1, ends_date=30)
-        self.assertEqual(True, question.can_vote())
-        question = create_question(question_text='Test question.', days=-10, ends_date=30)
-        self.assertEqual(True, question.can_vote())
+        """can_vote() return None for ended question."""
+        question = create_question(question_text='Test question.', days=1, ends_date=0)
+        self.assertEqual(None, question.can_vote())
+        question = create_question(question_text='Test question.', days=10, ends_date=-1)
+        self.assertEqual(None, question.can_vote())
 
 
 def create_question(question_text, days, ends_date=30):
